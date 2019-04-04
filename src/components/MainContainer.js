@@ -57,6 +57,8 @@ class MainContainer extends Component {
         	<div>
         		<Header/>
 
+        		<div>{process.env.REACT_APP_NOT_SECRET_CODE}</div>
+        		
             	{ this.state.players }
             	
             	<div><button onClick={this.pauseAll}>Triger Pause all</button></div>
