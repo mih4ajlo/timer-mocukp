@@ -1,6 +1,6 @@
 import react from 'react';
 
-import React, { Component } from 'react';
+import React, { Component, forwardRef, useRef, useImperativeHandle } from 'react';
 
 class Timer extends Component {
     
@@ -12,11 +12,13 @@ class Timer extends Component {
 
         this.state = { 
             seconds: props.basicTime * 60 /*7158*/,
-            pause:false,
+            pause:props.pause,
             byoyomiPeriods:props.byoyomiPeriods,
             byoyomi:props.byoyomi ,
             };
 
+
+        //this.timerRef = React.createRef();
 
         this.pause = this.pause.bind(this);    
     }
@@ -72,8 +74,8 @@ class Timer extends Component {
         }
 
 
-        return (
-            <div>
+        return  (
+            <div >
                 <span> hours:{hours}, minutes:{minutes}, seconds: {seconds} </span>
                 <div>ovde da ide cela povrsina; podeljeno na dva ekrana, da se klikne</div>
                 <div> <button onClick={this.pause}>Pause</button> </div>
@@ -83,3 +85,7 @@ class Timer extends Component {
 }
 
 export default Timer;
+
+export const pauseT = Timer.prototype.pause;
+
+export const timerState = Timer.prototype.state;

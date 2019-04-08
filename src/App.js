@@ -31,11 +31,13 @@ class App extends Component {
                     basicTime:1,
                     byoyomiTime:10,
                     byoyomiPeriods:3,
+                    pause:false,
                 },
                 {
                     basicTime:1,
                     byoyomiTime:10,
                     byoyomiPeriods:3,
+                    pause:false,
                 },
             ],
             basicTime:10,

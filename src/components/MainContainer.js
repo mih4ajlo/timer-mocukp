@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import Timer from './Timer';
+import Timer, {pauseT, timerState} from './Timer';
 import Header from './Header';
 
 
 class MainContainer extends Component {
    
+
+
     constructor(props) {
         super(props);
 
@@ -27,7 +29,10 @@ class MainContainer extends Component {
 
     	/*XXX verovatno treba forward ref */
     	
-    	console.log(this.state.players);
+    	
+    	
+    	this.state.players.forEach(el=>el.ref.current.pause())
+    	
     	
 
     	//alert("koje kude mori")
@@ -40,10 +45,14 @@ class MainContainer extends Component {
     	this.state.players = this.state.playersTime.map((el, ind)=>{
 
 
-    		console.log("sta bre", el );
+
+    		let timerRef = React.createRef();
 
     		return (
     			<Timer 
+
+    				ref={timerRef}
+
     				key={ind}
             		basicTime={ el.basicTime * 60} 
             		byoyomi={el.basicTime} 
