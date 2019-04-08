@@ -31,42 +31,9 @@ class Config extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            minPlayersNo:2,
-            playersNo:2,
-            playersTime:[
-                {
-                    basicTime:0,
-                    byoyomiTime:0,
-                    byoyomiPeriods:0,
-                },
-                {
-                    basicTime:0,
-                    byoyomiTime:0,
-                    byoyomiPeriods:0,
-                },
-            ],
-            value:5,
-            byoyomi:'3x15s',
-            byoyomiPeriods:0,
-            niz:
-                [
-                    {"name":'5m' , "id":1},
-                    {"name":'10m' , "id":2},
-                    {"name":'15m', "id":3} ,
-                    {"name":'30m', "id":4} ,
-                    {"name":'45m', "id":5} ,
-                    {"name":'60m', "id":6} ,
-                ],
-            niz2:[
-                    {"name":'10s' , "id":'10s'},
-                    {"name":'20s' , "id":'20s'},
-                    {"name":'30s' , "id":'30s'},
-                    {"name":'45s' , "id":'45s'},
-                    {"name":'60s', "id":'60s'} 
-            ],
-            
-        }
+        this.state = props.allProps;
+
+        this.updateF1 = props.updateF;
 
         this.handleChange = this.handleChange.bind(this);
         this.handleChange2 = this.handleChange2.bind(this);
@@ -77,7 +44,7 @@ class Config extends Component {
 
     handleChange (ev) {
         
-      this.setState({ value:ev.target.value })  
+      this.setState({ basicTime:ev.target.value })  
     } 
 
     handleChange2 (ev) {
@@ -108,25 +75,27 @@ class Config extends Component {
 
 
     setAll(ev){
-        this.setState((prev, next)=>{
 
-            const la = {
+        
+
+        this.updateF1/*setState*/({
+
+            
                 playersTime:[
                     {
-                        basicTime:prev.value,
-                        byoyomiTime: prev.byoyomi,
-                        byoyomiPeriods:prev.byoyomiPeriods,
+                        basicTime:this.state.basicTime,
+                        byoyomiTime: this.state.byoyomi,
+                        byoyomiPeriods:this.state.byoyomiPeriods,
                     },
                     {
-                        basicTime:prev.value,
-                        byoyomiTime: prev.byoyomi,
-                        byoyomiPeriods:prev.byoyomiPeriods,
+                        basicTime:this.state.basicTime,
+                        byoyomiTime: this.state.byoyomi,
+                        byoyomiPeriods:this.state.byoyomiPeriods,
                     },
-                ]};
+                ]
+            
 
-            console.log(la);
-            debugger
-            return {prev,playersTime:la.playersTime};
+             
 
         })
     }
@@ -154,7 +123,7 @@ class Config extends Component {
 
                     <div>
                         <label htmlFor="basicTime">Osnovno vreme</label>
-                        <select name="basicTime" value={this.state.value} onChange={this.handleChange}>
+                        <select name="basicTime" value={this.state.basicTime} onChange={this.handleChange}>
                             {this.state.niz.map(el=>this.returnSelectOption(el))}
                         </select>
                     </div>

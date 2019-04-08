@@ -7,11 +7,14 @@ class Timer extends Component {
 
     constructor(props) {
         super(props);
+
+        //console.log( props );
+
         this.state = { 
-            seconds: props.basicTime /*7158*/,
+            seconds: props.basicTime * 60 /*7158*/,
             pause:false,
-            byoyomiPeriods:3,
-            byoyomi:false,
+            byoyomiPeriods:props.byoyomiPeriods,
+            byoyomi:props.byoyomi ,
             };
 
 
@@ -43,6 +46,9 @@ class Timer extends Component {
         clearInterval( this.interval );
     }
 
+
+
+
     render() {
 
                     //~~ == Math.floor
@@ -58,8 +64,9 @@ class Timer extends Component {
         if(this.state.seconds == 0){
             //treba da se stopira, ako je istekao byoyomi, 
             //ili ako je sd (nema byoyomija)
-            if(this.props.byoyomi){
-                alert(this.props.byoyomiTime)
+            if(this.state.byoyomi){
+                alert("sta god",this.state.byoyomiTime)
+                //console.log(this.state);
             }
             clearInterval( this.interval );
         }

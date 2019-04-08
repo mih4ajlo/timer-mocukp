@@ -8,13 +8,10 @@ class MainContainer extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-        	playerNo:2,
-        	players:[],
-        	basicTime:"5m",
-        	byoyomiTime:"3x15s",
-        	byoyomi:false,
-        }
+        console.log(props);
+
+        this.state = {...props.allProps, players:[]};
+
 
         this.pauseAll  = this.pauseAll.bind(this);
 
@@ -29,22 +26,28 @@ class MainContainer extends Component {
     	})*/
 
     	/*XXX verovatno treba forward ref */
-    	console.log(this.state);
+    	
+    	console.log(this.state.players);
+    	
 
     	//alert("koje kude mori")
     }
 
     render() {
 
+    	//console.log(this.state.playersTime);
+    	
+    	this.state.players = this.state.playersTime.map((el, ind)=>{
 
 
-    	this.state.players = [1,2].map((el, ind)=>{
+    		console.log("sta bre", el );
+
     		return (
     			<Timer 
     				key={ind}
-            		basicTime={318} 
-            		byoyomi={true} 
-            		byoyomiTime={this.state.byoyomiTime}
+            		basicTime={ el.basicTime * 60} 
+            		byoyomi={el.basicTime} 
+            		byoyomiTime={+this.state.byoyomiTime}
             		player="1"
 
             		pauseAll={this.pauseAll}
