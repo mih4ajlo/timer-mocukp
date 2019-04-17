@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Timer, {pauseT, timerState} from './Timer';
+import Timer from './Timer';
 import Header from './Header';
 
 
@@ -12,39 +12,47 @@ class MainContainer extends Component {
 
         console.log(props);
 
-        this.state = {...props.allProps, players:[]};
+        this.state = props.allProps;
+        //{...props.allProps, players:[]};
 
+
+        this.countAll = props.countAll;
+        this.move = props.move;
+        console.log(props.move);
 
         this.pauseAll  = this.pauseAll.bind(this);
+        this.reset  = this.reset.bind(this);
 
     }
 
     pauseAll(){
-    	//treba da pozove metodu pauza u svim komponentama
-    	//verovatno znaci da mora da se ubaci neki handler/nesto
-    	//i da mora da se pravi dinamicki broj komponenata
-    	/*this.state.players.forEach(el=>{
-    		el.pause();	
-    	})*/
+    	//call on component method pause
+    	this.state.players.forEach(el=>el.ref.current.pause(this/*null*/, false))
+    	
+    }
 
-    	/*XXX verovatno treba forward ref */
-    	
-    	
-    	
-    	this.state.players.forEach(el=>el.ref.current.pause())
-    	
-    	
 
-    	//alert("koje kude mori")
+    reset(){
+
+    	let initSettings = {
+
+			seconds: this.state.basicTime * 60,
+			byoyomiPeriods:this.state.byoyomiPeriods,
+			byoyomiTime:this.state.byoyomiTime,
+			moveNo:0,
+
+    	}
+
+    	this.state.players.forEach(el=>el.ref.current.reset( initSettings ))
     }
 
     render() {
 
     	//console.log(this.state.playersTime);
     	
-    	this.state.players = this.state.playersTime.map((el, ind)=>{
+    	const playersTemp  = this.state.playersTime.map((el, ind)=>{
 
-
+    		
 
     		let timerRef = React.createRef();
 
@@ -52,14 +60,21 @@ class MainContainer extends Component {
     			<Timer 
 
     				ref={timerRef}
+					key={ind}
 
-    				key={ind}
-            		basicTime={ el.basicTime * 60} 
-            		byoyomi={el.basicTime} 
-            		byoyomiTime={+this.state.byoyomiTime}
-            		player="1"
+    				playerNo={ el.playerNo }
+    				seconds={+el.basicTime * 60 }
+            		basicTime={ +el.basicTime } 
+            		
+            		byoyomiPeriods={el.byoyomiPeriods} 
+            		byoyomiTime={el.byoyomiTime}
 
-            		pauseAll={this.pauseAll}
+            		moveNo={el.moveNo}
+            		pause={el.pause}
+
+            		countAll={this.countAll}
+            		move={this.move}
+            		
             		/>	
     			)
     		
@@ -71,9 +86,10 @@ class MainContainer extends Component {
 
         		<div>{process.env.REACT_APP_NOT_SECRET_CODE}</div>
         		
-            	{ this.state.players }
+            	{ playersTemp }
             	
             	<div><button onClick={this.pauseAll}>Triger Pause all</button></div>
+            	<div><button onClick={this.reset}>Reset all</button></div>
         	</div>
             
         );

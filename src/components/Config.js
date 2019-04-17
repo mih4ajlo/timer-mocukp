@@ -1,11 +1,7 @@
-import React,  {ReactDOM, Component, PropTypes } from 'react';
+import React,  { Component } from 'react';
 import Header from './Header';
 
-
-//import Button from './Button';
-
-//https://material-ui-pickers.dev/getting-started/installation
-
+import {settings} from '../data/initialData'
 
 /*
 
@@ -15,16 +11,6 @@ import Header from './Header';
 
 */
 
-/*
-
-playerNo:2,
-players:[],
-basicTime:"5m",
-byoyomiTime:"3x15s",
-byoyomi:false,
-
- */
-
 class Config extends Component {
    
 
@@ -33,7 +19,7 @@ class Config extends Component {
 
         this.state = props.allProps;
 
-        this.updateF1 = props.updateF;
+        this.updateGlobalState = props.updateGlobalState;
 
         this.handleChange = this.handleChange.bind(this);
         this.handleChange2 = this.handleChange2.bind(this);
@@ -49,7 +35,7 @@ class Config extends Component {
 
     handleChange2 (ev) {
         
-      this.setState({ byoyomi:ev.target.value }) 
+      this.setState({ byoyomiTime:ev.target.value }) 
 
       //console.log(ev.target.value); 
       //vs
@@ -63,7 +49,6 @@ class Config extends Component {
         
       this.setState({ byoyomiPeriods:ev.target.value })  
 
-      console.log( this.state.byoyomiPeriods);
     } 
 
     
@@ -76,20 +61,27 @@ class Config extends Component {
 
     setAll(ev){
 
-        
+        //napraviti generisanje ovog objekta, 
+        //u zavisnosti od broja igraca i takvih stvari
 
-        this.updateF1/*setState*/({
+        debugger
+
+        this.updateGlobalState/*setState*/({
+
+                basicTime:this.state.basicTime,
+                byoyomiTime:this.state.byoyomiTime,
+                byoyomiPeriods:this.state.byoyomiPeriods,
 
             
                 playersTime:[
                     {
                         basicTime:this.state.basicTime,
-                        byoyomiTime: this.state.byoyomi,
+                        byoyomiTime: this.state.byoyomiTime,
                         byoyomiPeriods:this.state.byoyomiPeriods,
                     },
                     {
                         basicTime:this.state.basicTime,
-                        byoyomiTime: this.state.byoyomi,
+                        byoyomiTime: this.state.byoyomiTime,
                         byoyomiPeriods:this.state.byoyomiPeriods,
                     },
                 ]
@@ -124,14 +116,14 @@ class Config extends Component {
                     <div>
                         <label htmlFor="basicTime">Osnovno vreme</label>
                         <select name="basicTime" value={this.state.basicTime} onChange={this.handleChange}>
-                            {this.state.niz.map(el=>this.returnSelectOption(el))}
+                            {settings.niz.map(el=>this.returnSelectOption(el))}
                         </select>
                     </div>
                     
                     <div>
                         <label htmlFor="byoyomiTime">Vreme za byoyomi</label>
-                        <select name="byoyomiTime" value={this.state.byoyomi} onChange={this.handleChange2}>
-                            {this.state.niz2.map(el=>this.returnSelectOption(el))}
+                        <select name="byoyomiTime" value={this.state.byoyomiTime} onChange={this.handleChange2}>
+                            {settings.niz2.map(el=>this.returnSelectOption(el))}
                         </select> 
 
                     </div>

@@ -1,43 +1,75 @@
-import react from 'react';
-
-import React, { Component, forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { Component } from 'react';
 
 class Timer extends Component {
     
 
     constructor(props) {
+
         super(props);
 
-        //console.log( props );
+        this.countAll = props.countAll;
+        this.move = props.move;
 
-        this.state = { 
-            seconds: props.basicTime * 60 /*7158*/,
-            pause:props.pause,
+        this.state = {
+
+            playerNo:props.playerNo, //redni broj igraca
+
+            seconds: +props.basicTime * 60, /*7158*/
+            basicTime: +props.basicTime,
+            
+            byoyomiTime:props.byoyomiTime,
             byoyomiPeriods:props.byoyomiPeriods,
-            byoyomi:props.byoyomi ,
-            };
+            
+            pause:props.pause,
+            moveNo:props.moveNo,
+        };
 
 
         //this.timerRef = React.createRef();
 
-        this.pause = this.pause.bind(this);    
+        /*this.move = this.move.bind(this);  */
+        this.pauseProxy = this.pauseProxy.bind(this);  
+        this.reset = this.reset.bind(this);    
     }
+
+
 
     tick(){
 
-        this.setState(state=>{
+        this.setState( state => {
             
             if( !state.pause )
-            
-            return {seconds : state.seconds - 1,}
+                return { seconds : state.seconds - 1,}
             
         }) ;
     }
 
-    pause(){
 
-        this.setState( state => ({ pause : !state.pause }) )
 
+    reset( initSettings ){
+
+        this.setState( state => {            
+
+                return { 
+                    seconds: +initSettings.seconds, /*7158*/
+                    basicTime: +initSettings.basicTime,    
+
+                    byoyomiPeriods: +initSettings.byoyomiPeriods,
+                    byoyomiTime: +initSettings.byoyomiTime,
+
+                    pause:true,
+                    moveNo:0,
+                }
+            });        
+
+    }
+
+
+   
+
+    pauseProxy(component){
+        
+        this.move( component, true, this.state.playerNo );
     }
 
     componentDidMount(){
@@ -48,9 +80,7 @@ class Timer extends Component {
         clearInterval( this.interval );
     }
 
-
-
-
+   
     render() {
 
                     //~~ == Math.floor
@@ -63,10 +93,10 @@ class Timer extends Component {
 
         //prvo da idemo u nazad
         
-        if(this.state.seconds == 0){
+        if(this.state.seconds === 0){
             //treba da se stopira, ako je istekao byoyomi, 
             //ili ako je sd (nema byoyomija)
-            if(this.state.byoyomi){
+            if(this.state.byoyomiTime){
                 alert("sta god",this.state.byoyomiTime)
                 //console.log(this.state);
             }
@@ -76,9 +106,12 @@ class Timer extends Component {
 
         return  (
             <div >
+                <div>
+                    Broj poteza {this.state.moveNo}
+                </div>
                 <span> hours:{hours}, minutes:{minutes}, seconds: {seconds} </span>
                 <div>ovde da ide cela povrsina; podeljeno na dva ekrana, da se klikne</div>
-                <div> <button onClick={this.pause}>Pause</button> </div>
+                <div> <button onClick={this.pauseProxy}>Pause</button> </div>
             </div>
         );
     }
@@ -86,6 +119,3 @@ class Timer extends Component {
 
 export default Timer;
 
-export const pauseT = Timer.prototype.pause;
-
-export const timerState = Timer.prototype.state;
