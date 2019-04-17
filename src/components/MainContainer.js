@@ -10,15 +10,14 @@ class MainContainer extends Component {
     constructor(props) {
         super(props);
 
-        console.log(props);
+//        console.log(props);
 
         this.state = props.allProps;
         //{...props.allProps, players:[]};
-
+        this.resetAllMovesCounter = props.resetAllMovesCounter;
 
         this.countAll = props.countAll;
         this.move = props.move;
-        console.log(props.move);
 
         this.pauseAll  = this.pauseAll.bind(this);
         this.reset  = this.reset.bind(this);
@@ -27,23 +26,28 @@ class MainContainer extends Component {
 
     pauseAll(){
     	//call on component method pause
-    	this.state.players.forEach(el=>el.ref.current.pause(this/*null*/, false))
+    	this.state.players.forEach(el=>el.ref.current.move( false, el.playerNo))
     	
     }
 
 
     reset(){
 
+    	//ne moze da se izdvoji u poseban fajl, 
+    	//zato sto zavisi od drugih parametara
+    	
+
     	let initSettings = {
 
-			seconds: this.state.basicTime * 60,
+			seconds:  this.state.basicTime * 60,
 			byoyomiPeriods:this.state.byoyomiPeriods,
 			byoyomiTime:this.state.byoyomiTime,
 			moveNo:0,
+			pause:false,
 
     	}
 
-    	this.state.players.forEach(el=>el.ref.current.reset( initSettings ))
+    	this.state.players.forEach( el => el.ref.current.reset( initSettings ) );
     }
 
     render() {
@@ -51,8 +55,6 @@ class MainContainer extends Component {
     	//console.log(this.state.playersTime);
     	
     	const playersTemp  = this.state.playersTime.map((el, ind)=>{
-
-    		
 
     		let timerRef = React.createRef();
 
@@ -63,7 +65,7 @@ class MainContainer extends Component {
 					key={ind}
 
     				playerNo={ el.playerNo }
-    				seconds={+el.basicTime * 60 }
+    				seconds={ el.seconds ||  +el.basicTime * 60 }
             		basicTime={ +el.basicTime } 
             		
             		byoyomiPeriods={el.byoyomiPeriods} 
@@ -72,6 +74,8 @@ class MainContainer extends Component {
             		moveNo={el.moveNo}
             		pause={el.pause}
 
+
+
             		countAll={this.countAll}
             		move={this.move}
             		
@@ -79,6 +83,9 @@ class MainContainer extends Component {
     			)
     		
     	});
+
+
+    	this.state.players = playersTemp;
 
         return (
         	<div>
@@ -89,7 +96,7 @@ class MainContainer extends Component {
             	{ playersTemp }
             	
             	<div><button onClick={this.pauseAll}>Triger Pause all</button></div>
-            	<div><button onClick={this.reset}>Reset all</button></div>
+            	<div><button onClick={this.resetAllMovesCounter}>Reset all</button></div>
         	</div>
             
         );

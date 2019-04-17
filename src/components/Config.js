@@ -30,7 +30,9 @@ class Config extends Component {
 
     handleChange (ev) {
         
-      this.setState({ basicTime:ev.target.value })  
+
+        //ako je basic time nula, setuj flag
+      this.setState({ basicTime:ev.target.value, basicTimeOver:+ev.target.value==0?true:false })  
     } 
 
     handleChange2 (ev) {
@@ -64,25 +66,34 @@ class Config extends Component {
         //napraviti generisanje ovog objekta, 
         //u zavisnosti od broja igraca i takvih stvari
 
-        debugger
+        //ovo mora da se setuje spram broja igraca
 
         this.updateGlobalState/*setState*/({
 
                 basicTime:this.state.basicTime,
                 byoyomiTime:this.state.byoyomiTime,
                 byoyomiPeriods:this.state.byoyomiPeriods,
+                totalMoves:0,
+
+                //mora da uzme broj igraca i ostale parametre i da generise ostatak
 
             
                 playersTime:[
                     {
                         basicTime:this.state.basicTime,
+                        basicTimeOver:+this.state.basicTime == 0 ? true:false ,
                         byoyomiTime: this.state.byoyomiTime,
                         byoyomiPeriods:this.state.byoyomiPeriods,
+                        moveNo:0,
+                        playerNo:0,
                     },
                     {
                         basicTime:this.state.basicTime,
+                        basicTimeOver:+this.state.basicTime == 0 ? true:false ,
                         byoyomiTime: this.state.byoyomiTime,
                         byoyomiPeriods:this.state.byoyomiPeriods,
+                        moveNo:0,
+                        playerNo:1,
                     },
                 ]
             
@@ -116,14 +127,14 @@ class Config extends Component {
                     <div>
                         <label htmlFor="basicTime">Osnovno vreme</label>
                         <select name="basicTime" value={this.state.basicTime} onChange={this.handleChange}>
-                            {settings.niz.map(el=>this.returnSelectOption(el))}
+                            {settings.osnovnoVreme.map(el=>this.returnSelectOption(el))}
                         </select>
                     </div>
                     
                     <div>
                         <label htmlFor="byoyomiTime">Vreme za byoyomi</label>
                         <select name="byoyomiTime" value={this.state.byoyomiTime} onChange={this.handleChange2}>
-                            {settings.niz2.map(el=>this.returnSelectOption(el))}
+                            {settings.byoyomiVreme.map(el=>this.returnSelectOption(el))}
                         </select> 
 
                     </div>
