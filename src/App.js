@@ -46,7 +46,7 @@ class App extends Component {
 
                     playerNo: ind,
 
-                    seconds: this.state.seconds || this.state.basicTime * 60, /*7158*/
+                    seconds: this.state.seconds || this.state.basicTime , /*7158*/
                     basicTime: this.state.basicTime,    
 
                     byoyomiPeriods: this.state.byoyomiPeriods,

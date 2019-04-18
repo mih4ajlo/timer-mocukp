@@ -32,7 +32,7 @@ class Config extends Component {
         
 
         //ako je basic time nula, setuj flag
-      this.setState({ basicTime:ev.target.value, basicTimeOver:+ev.target.value==0?true:false })  
+      this.setState({ basicTime:ev.target.value * 60, basicTimeOver:+ev.target.value == 0 ? true:false })  
     } 
 
     handleChange2 (ev) {

@@ -39,7 +39,7 @@ class MainContainer extends Component {
 
     	let initSettings = {
 
-			seconds:  this.state.basicTime * 60,
+			seconds:  this.state.basicTime ,
 			byoyomiPeriods:this.state.byoyomiPeriods,
 			byoyomiTime:this.state.byoyomiTime,
 			moveNo:0,
@@ -65,7 +65,7 @@ class MainContainer extends Component {
 					key={ind}
 
     				playerNo={ el.playerNo }
-    				seconds={ el.seconds ||  +el.basicTime * 60 }
+    				seconds={ el.seconds ||  +el.basicTime }
             		basicTime={ +el.basicTime } 
             		
             		byoyomiPeriods={el.byoyomiPeriods} 
