@@ -11,22 +11,22 @@ class Timer extends Component {
         this.move = props.move;
 
 
-        //sve prebaciti u globalno stanje
+        //XXX sve prebaciti u globalno stanje
 
-        this.state = {
+        this.state = props.playerState /*{
 
             playerNo:props.playerNo, //redni broj igraca
 
-            seconds:  props.seconds || +props.basicTime , /*7158*/
+            seconds:  props.seconds || +props.basicTime , 
             basicTime: +props.basicTime,
-            basicTimeOver: false /*props.basicTimeOver*/,
+            basicTimeOver: false ,
             
             byoyomiTime:props.byoyomiTime,
             byoyomiPeriods:props.byoyomiPeriods,
             
             pause:props.pause,
             moveNo:props.moveNo,
-        };
+        };*/
 
 
         //this.timerRef = React.createRef();

@@ -17,7 +17,7 @@
 
         playersTime: [
         {
-             seconds:0, 
+             seconds:10, 
              playerNo: 0,
              basicTimeOver:false,
              basicTime: 10,
@@ -27,7 +27,7 @@
              moveNo: 0,
         },
         {
-             seconds:0, 
+             seconds:10, 
              playerNo: 1,
              basicTimeOver:false,
              basicTime: 10,
@@ -37,7 +37,7 @@
              moveNo: 0,
         },
         {
-             seconds:0, 
+             seconds:10, 
              playerNo: 2,
              basicTimeOver:false,
              basicTime: 10,

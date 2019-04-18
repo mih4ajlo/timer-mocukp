@@ -64,15 +64,9 @@ class MainContainer extends Component {
     				ref={timerRef}
 					key={ind}
 
-    				playerNo={ el.playerNo }
-    				seconds={ el.seconds ||  +el.basicTime }
-            		basicTime={ +el.basicTime } 
-            		
-            		byoyomiPeriods={el.byoyomiPeriods} 
-            		byoyomiTime={el.byoyomiTime}
+					playerState =  {el}
 
-            		moveNo={el.moveNo}
-            		pause={el.pause}
+    				
 
 
 
@@ -84,6 +78,16 @@ class MainContainer extends Component {
     		
     	});
 
+
+/*playerNo={ el.playerNo }
+    				seconds={ el.seconds ||  +el.basicTime }
+            		basicTime={ +el.basicTime } 
+            		
+            		byoyomiPeriods={el.byoyomiPeriods} 
+            		byoyomiTime={el.byoyomiTime}
+
+            		moveNo={el.moveNo}
+            		pause={el.pause}*/
 
     	this.state.players = playersTemp;
 

@@ -36,34 +36,35 @@ class App extends Component {
   resetAllMovesCounter(){
 
 
-
      this.setState( state => {            
 
-            let allTimes = [];
+        let allTimes = [];
 
-              this.state.playersTime.forEach((el,ind)=>{
-                  allTimes[ind] = { 
+          //resetovanje kad su svi istih vremena
 
-                    playerNo: ind,
+          this.state.playersTime.forEach((el,ind)=>{
+              allTimes[ind] = { 
 
-                    seconds: this.state.seconds || this.state.basicTime , /*7158*/
-                    basicTime: this.state.basicTime,    
+                playerNo: ind,
 
-                    byoyomiPeriods: this.state.byoyomiPeriods,
-                    byoyomiTime: this.state.byoyomiTime,
+                seconds: this.state.seconds || this.state.basicTime , /*7158*/
+                basicTime: this.state.basicTime,    
 
-                    pause:true,
-                    moveNo:0,
-                }
+                byoyomiPeriods: this.state.byoyomiPeriods,
+                byoyomiTime: this.state.byoyomiTime,
+
+                pause:true,
+                moveNo:0,
+            }
+
+        
+
+          })
+
+            return  {...state, playersTime:allTimes, totalMoves:0}
 
             
-
-              })
-
-                return  {...state, playersTime:allTimes, totalMoves:0}
-
-                
-            });        
+        });        
   }
 
   allMovesCounter(playerNo, singleTimerParams){
