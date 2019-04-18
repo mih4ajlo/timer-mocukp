@@ -25,9 +25,11 @@ class App extends Component {
 
 
     this.move = this.move.bind(this);
+    this.tick = this.tick.bind(this);
     this.updateGlobalState = this.updateGlobalState.bind(this);
     this.allMovesCounter = this.allMovesCounter.bind(this);
     this.resetAllMovesCounter = this.resetAllMovesCounter.bind(this);
+
         
   }
 
@@ -81,6 +83,66 @@ class App extends Component {
        })
 
   }
+
+
+
+    tick(playerNo = 0, basicTimeOver = false, byoyomiTime, byoyomiPeriods ){
+
+        this.setState( state => {
+
+            console.log( state.playersTime[playerNo] );
+            //return;
+
+
+
+
+            //ovde ce morati da se update-uje i sistem byoyomija
+            //treba mi flag da je regularno vreme isteklo
+            //ako je regularno vreme isteklo, resetuj vreme na max byoyomija
+            
+            let nizIgracaTemp =  state.playersTime;
+            
+
+            if(!basicTimeOver){
+                //funk
+                //
+                // state.playersTime[playerNo] : {state.playersTime[playerNo]}
+                // 
+                if( !nizIgracaTemp[playerNo].pause ) {
+                  nizIgracaTemp[playerNo].seconds = nizIgracaTemp[playerNo].seconds - 1
+                  
+                }
+                    
+            }
+            else if( nizIgracaTemp[playerNo].seconds > 0 && byoyomiPeriods > 0) { //kad se byoyomi time umanjuje?
+                //setuje se na celokupno byoyomi vreme
+                nizIgracaTemp[playerNo].seconds = nizIgracaTemp[playerNo].byoyomiTime;
+                nizIgracaTemp[playerNo].basicTimeOver = true;
+
+            }
+
+            else if(nizIgracaTemp[playerNo].seconds == 0 && byoyomiPeriods > 0) {
+                
+                nizIgracaTemp[playerNo].seconds = nizIgracaTemp[playerNo].byoyomiTime;
+                nizIgracaTemp[playerNo].basicTimeOver = true;
+                nizIgracaTemp[playerNo].byoyomiPeriods = nizIgracaTemp[playerNo].byoyomiPeriods - 1;
+
+            }
+            else {
+                //bP == 0
+                nizIgracaTemp[playerNo].seconds = 0
+                nizIgracaTemp[playerNo].basicTimeOver = true;
+                nizIgracaTemp[playerNo].byoyomiPeriods = 0;
+                nizIgracaTemp[playerNo].pause = true;
+
+            }
+
+            return { playersTime:nizIgracaTemp   }
+            
+        }) ;
+
+        //console.log(this.state);
+    }
 
 
   move( single = false, playerNo = 0, singlePlayerParams ){
@@ -153,6 +215,7 @@ class App extends Component {
                                 countAll={this.allMovesCounter}
                                 move={this.move}
                                 resetAllMovesCounter = {this.resetAllMovesCounter}
+                                tick={this.tick}
                                 />
                               }  
                             />

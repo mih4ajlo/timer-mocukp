@@ -18,6 +18,7 @@ class MainContainer extends Component {
 
         this.countAll = props.countAll;
         this.move = props.move;
+        this.tick = props.tick;
 
         this.pauseAll  = this.pauseAll.bind(this);
         this.reset  = this.reset.bind(this);
@@ -66,9 +67,7 @@ class MainContainer extends Component {
 
 					playerState =  {el}
 
-    				
-
-
+    				tick1 = { this.tick }
 
             		countAll={this.countAll}
             		move={this.move}

@@ -7,31 +7,17 @@ class Timer extends Component {
 
         super(props);
 
+        //referenced higher methods
         this.countAll = props.countAll;
         this.move = props.move;
+        this.updateSingleState = props.updateSingleState;
+
+        this.state = props.playerState;
 
 
-        //XXX sve prebaciti u globalno stanje
-
-        this.state = props.playerState /*{
-
-            playerNo:props.playerNo, //redni broj igraca
-
-            seconds:  props.seconds || +props.basicTime , 
-            basicTime: +props.basicTime,
-            basicTimeOver: false ,
-            
-            byoyomiTime:props.byoyomiTime,
-            byoyomiPeriods:props.byoyomiPeriods,
-            
-            pause:props.pause,
-            moveNo:props.moveNo,
-        };*/
+        this.tick1 = props.tick1;
 
 
-        //this.timerRef = React.createRef();
-
-        /*this.move = this.move.bind(this);  */
         this.pauseProxy = this.pauseProxy.bind(this);  
         
     }
@@ -39,7 +25,7 @@ class Timer extends Component {
 
 
 
-     pauseProxy(component){
+    pauseProxy(component){
         
         //mora da ide ceo niz sa preostalim vremenom i byoyomi periodima i svim ostalim
         
@@ -50,40 +36,6 @@ class Timer extends Component {
 
 
 
-
-    tick(basicTimeOver = false, byoyomiTime, byoyomiPeriods ){
-
-        this.setState( state => {
-
-            //ovde ce morati da se update-uje i sistem byoyomija
-            //treba mi flag da je regularno vreme isteklo
-            //ako je regularno vreme isteklo, resetuj vreme na max byoyomija
-            
-            if(!basicTimeOver){
-                //funk
-                if( !state.pause ) //ovo je problematicno
-                    return { seconds : state.seconds - 1,}
-            }
-            else if( state.seconds > 0 && byoyomiPeriods > 0) { //kad se byoyomi time umanjuje?
-                //setuje se na celokupno byoyomi vreme
-                return {basicTimeOver:true, seconds : this.state.byoyomiTime } 
-            }
-
-            else if(state.seconds == 0 && byoyomiPeriods > 0) {
-                
-                return {basicTimeOver:true, seconds : this.state.byoyomiTime, byoyomiPeriods:this.state.byoyomiPeriods - 1 }
-            }
-            else {
-                //bP == 0
-                return {basicTimeOver:true, seconds : 0, byoyomiPeriods:0, pause:true }
-            }
-
-            
-            
-        }) ;
-
-        //console.log(this.state);
-    }
 
     componentDidMount(){
         //mislim da ovaj mora da okine setovanje stananja kada se istrosi regularno vreme
@@ -97,15 +49,15 @@ class Timer extends Component {
             //ovo se ne menja ovde
 
             if(this.state.seconds == 0 && !this.state.basicTimeOver ){
-                this.tick( true/*basic time is over*/,this.state.byoyomiTime, this.state.byoyomiPeriods );    
+                this.tick1(this.state.playerNo, true/*basic time is over*/,this.state.byoyomiTime, this.state.byoyomiPeriods );    
             }
             else if(this.state.seconds == 0 && this.state.basicTimeOver && this.state.byoyomiPeriods == 0 ){
-                this.tick(true, 0/*byoyomiVreme*/, 0/*byoyomiPeriodi*/); //XXX - over, kraj, ende
+                this.tick1(this.state.playerNo,true, 0/*byoyomiVreme*/, 0/*byoyomiPeriodi*/); //XXX - over, kraj, ende
             }
             else if(this.state.seconds == 0 && this.state.basicTimeOver && this.state.byoyomiPeriods > 0 ){
-                this.tick(true, 0/*byoyomiVreme*/, this.state.byoyomiPeriods); //XXX - over, kraj, ende
+                this.tick1(this.state.playerNo,true, 0/*byoyomiVreme*/, this.state.byoyomiPeriods); //XXX - over, kraj, ende
             }
-            this.tick();
+            this.tick1( this.state.playerNo, );
             
 
         }, 1000);
