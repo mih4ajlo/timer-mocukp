@@ -32,7 +32,7 @@ class Config extends Component {
         
 
         //ako je basic time nula, setuj flag
-      this.setState({ basicTime:ev.target.value * 60, basicTimeOver:+ev.target.value == 0 ? true:false })  
+      this.setState({ basicTime:+ev.target.value * 60, basicTimeOver:+ev.target.value == 0 ? true:false })  
     } 
 
     handleChange2 (ev) {
@@ -68,9 +68,11 @@ class Config extends Component {
 
         //ovo mora da se setuje spram broja igraca
 
+        console.log(this.state);
+
         this.updateGlobalState/*setState*/({
 
-                basicTime:this.state.basicTime,
+                basicTime:+this.state.basicTime,
                 byoyomiTime:this.state.byoyomiTime,
                 byoyomiPeriods:this.state.byoyomiPeriods,
                 totalMoves:0,
@@ -80,6 +82,7 @@ class Config extends Component {
             
                 playersTime:[
                     {
+                        seconds:+this.state.basicTime,
                         basicTime:this.state.basicTime,
                         basicTimeOver:+this.state.basicTime == 0 ? true:false ,
                         byoyomiTime: this.state.byoyomiTime,
@@ -88,6 +91,7 @@ class Config extends Component {
                         playerNo:0,
                     },
                     {
+                        seconds:+this.state.basicTime,
                         basicTime:this.state.basicTime,
                         basicTimeOver:+this.state.basicTime == 0 ? true:false ,
                         byoyomiTime: this.state.byoyomiTime,
