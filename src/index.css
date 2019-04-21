@@ -13,3 +13,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
+#timerContainer{
+	height: 50vh;
+	display: grid;
+	/* grid-template-columns: 30% 50% 20%; */
+  	grid-template-rows: 40% 20% 40%;
+}

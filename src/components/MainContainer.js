@@ -78,25 +78,30 @@ class MainContainer extends Component {
     	});
 
 
-/*playerNo={ el.playerNo }
-    				seconds={ el.seconds ||  +el.basicTime }
-            		basicTime={ +el.basicTime } 
-            		
-            		byoyomiPeriods={el.byoyomiPeriods} 
-            		byoyomiTime={el.byoyomiTime}
+    	//zasta mi ovo treba u state-u? da li se negde koriste componente?
+    	//this.state.players = playersTemp;
+    	let elements_temp = [];
 
-            		moveNo={el.moveNo}
-            		pause={el.pause}*/
+    	for (var i = 0; i < playersTemp.length; i++) {
+    		if(i%2==1)
+    			elements_temp.push(<div id='separator'>Nesto</div>) ;
+    		elements_temp.push( playersTemp[i] ) ;
+    	}
 
-    	this.state.players = playersTemp;
+		
+		console.log( elements_temp );
+
+    	//
 
         return (
         	<div>
         		<Header/>
 
         		<div>{process.env.REACT_APP_NOT_SECRET_CODE}</div>
-        		
-            	{ playersTemp }
+        		<div id="timerContainer">
+        			{ elements_temp }
+        		</div>
+            	
             	
             	<div><button onClick={this.pauseAll}>Triger Pause all</button></div>
             	<div><button onClick={this.resetAllMovesCounter}>Reset all</button></div>

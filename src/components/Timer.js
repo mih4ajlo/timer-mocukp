@@ -97,7 +97,8 @@ class Timer extends Component {
 
 
         return  (
-            <div >
+
+            <div style={(this.state.playerNo % 2 == 1)? {transform:'rotate(-180deg)'}:null}>
                 <div>
                     Broj poteza {this.state.moveNo}
                 </div>
@@ -106,6 +107,7 @@ class Timer extends Component {
                 <div>ovde da ide cela povrsina; podeljeno na dva ekrana, da se klikne</div>
                 <div> <button onClick={this.pauseProxy}>Move</button> </div>
             </div>
+            
         );
     }
 }

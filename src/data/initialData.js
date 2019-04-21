@@ -36,16 +36,7 @@
              pause: true,
              moveNo: 0,
         },
-        {
-             seconds:10, 
-             playerNo: 2,
-             basicTimeOver:false,
-             basicTime: 10,
-             byoyomiTime: 10,
-             byoyomiPeriods: 3,
-             pause: true,
-             moveNo: 0,
-        },
+        
      ],
 
      //initial settings
