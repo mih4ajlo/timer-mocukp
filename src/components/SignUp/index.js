@@ -36,7 +36,7 @@ class SignUpFormBase extends Component {
         const {username, passwordOne, email} = this.state;
 
         this.props.firebase
-            .doCreateUserWithEmailAndPassword(username, passwordOne)
+            .doCreateUserWithEmailAndPassword(email, passwordOne)
             .then( authUser =>{
                 this.setState({...INITIAL_STATE});
                 this.props.history.push(ROUTES.HOME);
