@@ -3,6 +3,9 @@ import Timer from './Timer';
 import Header from './Header';
 
 
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+
 class MainContainer extends Component {
    
 
@@ -19,6 +22,10 @@ class MainContainer extends Component {
         this.countAll = props.countAll;
         this.move = props.move;
         this.tick = props.tick;
+
+        this.rutaConfig = props.rutaConfig;
+
+        console.log("ruta",this.rutaConfig);
 
         this.pauseAll  = this.pauseAll.bind(this);
         this.reset  = this.reset.bind(this);
@@ -83,8 +90,17 @@ class MainContainer extends Component {
     	let elements_temp = [];
 
     	for (var i = 0; i < playersTemp.length; i++) {
+
+    		const that = this;
     		if(i%2==1)
-    			elements_temp.push(<div id='separator'>Nesto</div>) ;
+    			elements_temp.push(
+    				<div id="centralControls" key={"kontrole"}>
+    					<div><button onClick={that.pauseAll}>Triger Pause all</button></div>
+            			<div><button onClick={that.resetAllMovesCounter}>Reset all</button></div>
+            			{that.rutaConfig}
+
+    				</div>
+    				) ;
     		elements_temp.push( playersTemp[i] ) ;
     	}
 
@@ -103,8 +119,7 @@ class MainContainer extends Component {
         		</div>
             	
             	
-            	<div><button onClick={this.pauseAll}>Triger Pause all</button></div>
-            	<div><button onClick={this.resetAllMovesCounter}>Reset all</button></div>
+            	
         	</div>
             
         );

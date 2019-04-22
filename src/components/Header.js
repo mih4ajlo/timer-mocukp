@@ -19,6 +19,9 @@ class Header extends Component {
 				      <li>
 				        <Link to="/config">config</Link>
 				      </li>
+                      <li>
+                        <Link to="/sub">sub</Link>
+                      </li>
 				      
 				    </ul>
         		</header>

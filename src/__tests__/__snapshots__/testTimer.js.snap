@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Timer component it matches snapshot 1`] = `
+<div
+  style={null}
+>
+  <div>
+    Broj poteza 
+    0
+  </div>
+  <span>
+     hours:
+    0
+    , minutes:
+    5
+    , seconds: 
+    0
+     
+  </span>
+  <div>
+    byoyomi periods: 
+    3
+    , byoyomi time: 
+    10
+  </div>
+  <div>
+    ovde da ide cela povrsina; podeljeno na dva ekrana, da se klikne
+  </div>
+  <div>
+     
+    <button
+      onClick={[Function]}
+    >
+      Move
+    </button>
+     
+  </div>
+</div>
+`;

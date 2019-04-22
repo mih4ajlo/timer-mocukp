@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, withRouter } from "react-router-dom";
 
 
 import MainContainer from './components/MainContainer';
 import Config from './components/Config';
+import SubPage from './components/SubPage';
 
+import {withFirebase} from './components/Firebase';
 
 //import logo from './logo.svg';
 
@@ -201,6 +203,16 @@ class App extends Component {
 
 
   render() {
+
+    const rutaConfig = (<Route path="/config" key="config_deo"
+              component={
+                  (props)=>
+                      <Config 
+                          allProps={this.state} 
+                          updateGlobalState={this.updateGlobalState} />
+                        }  
+          />);
+
     return (
       <Router>
         <div className="App" >
@@ -216,17 +228,22 @@ class App extends Component {
                                 move={this.move}
                                 resetAllMovesCounter = {this.resetAllMovesCounter}
                                 tick={this.tick}
+
+                                rutaConfig={rutaConfig}
+
                                 />
                               }  
-                            />
-          <Route path="/config" 
-                    component={
-                        (props)=>
-                            <Config 
-                                allProps={this.state} 
-                                updateGlobalState={this.updateGlobalState} />
-                              }  
-                            />
+          />
+
+          {rutaConfig}
+
+          <Route path="/sub" key="sub_page"
+              component={
+                  (props)=>
+                      <SubPage {...props}/>
+                        }  
+          />
+          
 
         </div>
       </Router>

@@ -1,0 +1,9 @@
+console.time("%1 m")
+la = 3791;
+la%3600
+console.timeEnd("%1 m")
+
+console.time("%2 m")
+la = 3991;
+Math.floor(la / 3600)
+console.timeEnd("%2 m")

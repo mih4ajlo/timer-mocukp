@@ -1,0 +1,12 @@
+komponente
+
+	https://github.com/IBM/carbon-components-react
+	https://developer.microsoft.com/en-us/fabric#/components
+	*https://blueprintjs.com/docs/
+
+*najlaksa za instaliranje
+
+//funk 3rd party styles
+	https://stackoverflow.com/questions/36209318/using-webpack-to-load-css-files-from-node-modules
+
+	https://medium.com/@marzelin/using-css-modules-with-third-party-stylesheets-c9633ff759c1
