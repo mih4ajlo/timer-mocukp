@@ -35,6 +35,8 @@ class Firebase {
     }
     
     doSignOut = ()=>{
+
+      alert(this.auth);
     	return this.auth.signOut()
     }
 
