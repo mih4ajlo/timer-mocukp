@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, withRouter } from "react-router-dom";
 import MainContainer from './components/MainContainer';
 import Config from './components/Config';
 import SubPage from './components/SubPage';
+import SignIn from './components/SignIn';
 
 import {withFirebase} from './components/Firebase';
 
@@ -241,6 +242,13 @@ class App extends Component {
               component={
                   (props)=>
                       <SubPage {...props}/>
+                        }  
+          />
+
+          <Route path="/signIn" key="sign_page"
+              component={
+                  (props)=>
+                      <SignIn {...props}/>
                         }  
           />
           
