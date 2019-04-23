@@ -25,7 +25,7 @@ class MainContainer extends Component {
 
         this.rutaConfig = props.rutaConfig;
 
-        console.log("ruta",this.rutaConfig);
+        //console.log("ruta",this.rutaConfig);
 
         this.pauseAll  = this.pauseAll.bind(this);
         this.reset  = this.reset.bind(this);
@@ -105,13 +105,10 @@ class MainContainer extends Component {
     	}
 
 		
-		console.log( elements_temp );
-
-    	//
 
         return (
         	<div>
-        		<Header/>
+        		
 
         		<div>{process.env.REACT_APP_NOT_SECRET_CODE}</div>
         		<div id="timerContainer">

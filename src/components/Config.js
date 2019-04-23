@@ -110,7 +110,7 @@ class Config extends Component {
     render() {
         return (
             <div>
-                <Header/>
+                
                 <div>Config page</div> 
 
                 <button 

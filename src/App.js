@@ -8,6 +8,8 @@ import Config from './components/Config';
 import SubPage from './components/SubPage';
 import SignIn from './components/SignIn';
 
+import Header from './components/Header';
+
 import {withFirebase} from './components/Firebase';
 
 //import logo from './logo.svg';
@@ -23,8 +25,11 @@ class App extends Component {
   constructor(props){
     super(props);
 
+
+
+
     //set initial data from data file 
-    this.state = initialData;
+    this.state = {...initialData, authUser: null, firebase:props.firebase};
 
 
     this.move = this.move.bind(this);
@@ -93,7 +98,7 @@ class App extends Component {
 
         this.setState( state => {
 
-            console.log( state.playersTime[playerNo] );
+            //console.log( state.playersTime[playerNo] );
             //return;
 
 
@@ -203,6 +208,18 @@ class App extends Component {
   }
 
 
+  componentDidMount(){
+      
+    //console.log("did mount props", this.props);
+
+    this.props.firebase.auth.onAuthStateChanged(authUser =>{
+      authUser
+        ?this.setState({authUser})
+        :this.setState({authUser:null})
+    })
+  }
+
+
   render() {
 
     const rutaConfig = (<Route path="/config" key="config_deo"
@@ -217,6 +234,8 @@ class App extends Component {
     return (
       <Router>
         <div className="App" >
+
+          <Header authUser={this.state.authUser}/>
           
           <div>{this.state.totalMoves}</div>
           
@@ -259,4 +278,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withFirebase(App);

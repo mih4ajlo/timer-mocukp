@@ -3,38 +3,56 @@ import { Link } from "react-router-dom";
 
 import SignOutButton from './SignOut';
 
-class Header extends Component {
-    
 
-   /* constructor(props) {
-        super(props);
-    }*/
 
-    render() {
-        return (
-            <header>
-        			<ul>
-				      <li>
-				        <Link to="/">Home</Link>
-				      </li>
-				      <li>
-				        <Link to="/config">config</Link>
-				      </li>
-                      <li>
-                        <Link to="/sub">sub</Link>
-                      </li>
 
-                      <li>
-                        <Link to="/signIn">sign in</Link>
-                      </li>
-                      <li>
-                        <SignOutButton/>
-                      </li>
-				      
-				    </ul>
-        		</header>
-        );
-    }
-}
+const Header = ({ authUser }) => (
+
+    <header>{authUser ? <HeaderAuth /> : <HeaderNonAuth/> }</header>
+
+);
+
+
+const HeaderAuth = () => (
+
+
+    <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/config">config</Link>
+              </li>
+                      
+              <li>
+                <SignOutButton/>
+              </li>
+              
+            </ul>
+
+
+);
+
+
+
+const HeaderNonAuth = () => (
+
+
+    <ul>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      
+      
+      <li>
+        <Link to="/signIn">sign in</Link>
+      </li>
+
+    </ul>
+
+
+);
+
+
 
 export default Header;
