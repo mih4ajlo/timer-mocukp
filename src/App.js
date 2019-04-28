@@ -12,6 +12,9 @@ import Header from './components/Header';
 
 import {withFirebase} from './components/Firebase';
 
+
+import { AuthUserContext } from './components/Session';
+
 //import logo from './logo.svg';
 
 import './App.css';
@@ -232,10 +235,12 @@ class App extends Component {
           />);
 
     return (
+
+      <AuthUserContext.Provider value={this.state.authUser}>
       <Router>
         <div className="App" >
 
-          <Header authUser={this.state.authUser}/>
+          <Header />
           
           <div>{this.state.totalMoves}</div>
           
@@ -274,6 +279,7 @@ class App extends Component {
 
         </div>
       </Router>
+      </AuthUserContext.Provider>
     );
   }
 }

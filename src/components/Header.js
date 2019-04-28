@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 
 import SignOutButton from './SignOut';
 
-
+import { AuthUserContext } from './Session'
 
 
 const Header = ({ authUser }) => (
-
+  <AuthUserContext.Consumer>{authUser =>
     <header>{authUser ? <HeaderAuth /> : <HeaderNonAuth/> }</header>
-
+  }
+  </AuthUserContext.Consumer>
 );
 
 
