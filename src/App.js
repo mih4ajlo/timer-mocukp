@@ -10,10 +10,7 @@ import SignIn from './components/SignIn';
 
 import Header from './components/Header';
 
-import {withFirebase} from './components/Firebase';
-
-
-import { AuthUserContext } from './components/Session';
+import { withAuthentication } from './components/Session';
 
 //import logo from './logo.svg';
 
@@ -210,7 +207,7 @@ class App extends Component {
     
   }
 
-
+/*
   componentDidMount(){
       
     //console.log("did mount props", this.props);
@@ -220,7 +217,7 @@ class App extends Component {
         ?this.setState({authUser})
         :this.setState({authUser:null})
     })
-  }
+  }*/
 
 
   render() {
@@ -236,7 +233,7 @@ class App extends Component {
 
     return (
 
-      <AuthUserContext.Provider value={this.state.authUser}>
+      
       <Router>
         <div className="App" >
 
@@ -279,9 +276,9 @@ class App extends Component {
 
         </div>
       </Router>
-      </AuthUserContext.Provider>
+     
     );
   }
 }
 
-export default withFirebase(App);
+export default withAuthentication(App);
