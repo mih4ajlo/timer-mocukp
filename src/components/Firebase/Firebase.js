@@ -26,7 +26,7 @@ class Firebase {
     }
 
     doCreateUserWithEmailAndPassword = (email,password) =>{
-    	console.log(email, password);
+    	//console.log(email, password);
     	return this.auth.createUserWithEmailAndPassword(email, password);
     }
 
@@ -36,7 +36,7 @@ class Firebase {
     
     doSignOut = ()=>{
 
-      alert(this.auth);
+      //alert(this.auth);
     	return this.auth.signOut()
     }
 
@@ -45,6 +45,8 @@ class Firebase {
     }
 
   	doPasswordUpdate = password =>{
+
+      
     	return this.auth.currentUser.updatePassword(password);  	
 	}
 }

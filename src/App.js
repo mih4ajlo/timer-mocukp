@@ -7,6 +7,10 @@ import MainContainer from './components/MainContainer';
 import Config from './components/Config';
 import SubPage from './components/SubPage';
 import SignIn from './components/SignIn';
+import PassForgetPage from './components/PasswordForget';
+import PasswordChangeForm from './components/PasswordChange';
+import Account from './components/Account';
+
 
 import Header from './components/Header';
 
@@ -270,6 +274,27 @@ class App extends Component {
               component={
                   (props)=>
                       <SignIn {...props}/>
+                        }  
+          />
+
+          <Route path="/pass_forget" key="forget_page"
+              component={
+                  (props)=>
+                      <PassForgetPage {...props}/>
+                        }  
+          />
+
+          <Route path="/pass_change" key="change_page"
+              component={
+                  (props)=>
+                      <PasswordChangeForm {...props}/>
+                        }  
+          />
+
+          <Route path="/account" key="account_page"
+              component={
+                  (props)=>
+                      <Account {...props}/>
                         }  
           />
           
