@@ -10,6 +10,7 @@ import SignIn from './components/SignIn';
 import PassForgetPage from './components/PasswordForget';
 import PasswordChangeForm from './components/PasswordChange';
 import Account from './components/Account';
+import Admin from './components/Admin';
 
 
 import Header from './components/Header';
@@ -227,12 +228,12 @@ class App extends Component {
   render() {
 
     const rutaConfig = (<Route path="/config" key="config_deo"
-              component={
-                  (props)=>
-                      <Config 
-                          allProps={this.state} 
-                          updateGlobalState={this.updateGlobalState} />
-                        }  
+        component={
+            (props)=>
+                <Config 
+                    allProps={this.state} 
+                    updateGlobalState={this.updateGlobalState} />
+                  }  
           />);
 
     return (
@@ -243,22 +244,22 @@ class App extends Component {
 
           <Header />
           
-          <div>{this.state.totalMoves}</div>
+          <div>{`Total moves: ${this.state.totalMoves}`}</div>
           
           <Route exact path="/" 
-                    component={
-                        (props)=>
-                            <MainContainer 
-                                allProps={this.state} 
-                                countAll={this.allMovesCounter}
-                                move={this.move}
-                                resetAllMovesCounter = {this.resetAllMovesCounter}
-                                tick={this.tick}
+              component={
+                  (props)=>
+                      <MainContainer 
+                          allProps={this.state} 
+                          countAll={this.allMovesCounter}
+                          move={this.move}
+                          resetAllMovesCounter = {this.resetAllMovesCounter}
+                          tick={this.tick}
 
-                                rutaConfig={rutaConfig}
+                          rutaConfig={rutaConfig}
 
-                                />
-                              }  
+                          />
+                        }  
           />
 
           {rutaConfig}
@@ -295,6 +296,13 @@ class App extends Component {
               component={
                   (props)=>
                       <Account {...props}/>
+                        }  
+          />
+
+           <Route path="/admin" key="admin_page"
+              component={
+                  (props)=>
+                      <Admin {...props}/>
                         }  
           />
           

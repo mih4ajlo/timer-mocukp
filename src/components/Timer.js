@@ -83,7 +83,10 @@ class Timer extends Component {
         let minutes =  Math.floor( (this.state.seconds - hours * 3600) / 60);
         let seconds =  this.state.seconds - minutes * 60 - hours * 3600;
 
-        
+        if( hours < 10 ) hours = '0' + hours;
+        if( minutes < 10 ) minutes = '0' + minutes;
+        if( seconds < 10 ) seconds = '0' + seconds;
+
         if(this.state.seconds === 0){
             //treba da se stopira, ako je istekao byoyomi, 
             //ili ako je sd (nema byoyomija)
@@ -96,15 +99,19 @@ class Timer extends Component {
         }
 
 
+        //rotacija da ide u config
+
         return  (
 
-            <div style={(this.state.playerNo % 2 == 1)? {transform:'rotate(-180deg)'}:null}>
+            <div style={(this.state.playerNo % 2 == 0 && false)? {transform:'rotate(-180deg)'}:null}>
                 <div>
                     Broj poteza {this.state.moveNo}
                 </div>
-                <span> hours:{hours}, minutes:{minutes}, seconds: {seconds} </span>
-                <div>byoyomi periods: {this.state.byoyomiPeriods}, byoyomi time: {this.state.byoyomiTime}</div>
-                <div>ovde da ide cela povrsina; podeljeno na dva ekrana, da se klikne</div>
+                <div>{this.state.byoyomiPeriods} x {this.state.byoyomiTime}</div>
+                <div>hh:mm:ss </div>
+                <span>{hours}:{minutes}:{seconds}</span>
+
+                
                 <div> <button onClick={this.pauseProxy}>Move</button> </div>
             </div>
             

@@ -110,7 +110,7 @@ class MainContainer extends Component {
         	<div>
         		
 
-        		<div>{process.env.REACT_APP_NOT_SECRET_CODE}</div>
+        		<div></div>
         		<div id="timerContainer">
         			{ elements_temp }
         		</div>

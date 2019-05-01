@@ -5,7 +5,11 @@
 //zeznuto - treba posvetiti ceo dan ovom cudu
 
 import app from 'firebase/app';
+
+
 import 'firebase/auth';
+import 'firebase/database';
+
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -23,6 +27,7 @@ class Firebase {
         app.initializeApp(config);
 
         this.auth = app.auth();
+        this.db = app.database();
     }
 
     doCreateUserWithEmailAndPassword = (email,password) =>{
@@ -46,9 +51,12 @@ class Firebase {
 
   	doPasswordUpdate = password =>{
 
-      
     	return this.auth.currentUser.updatePassword(password);  	
-	}
+	  }
+
+    user = uid => this.db.ref(`users/${uid}`)
+
+    users = () => this.db.ref(`users`)
 }
 
 export default Firebase;
