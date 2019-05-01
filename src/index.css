@@ -16,8 +16,12 @@ code {
 
 
 #timerContainer{
-	height: 50vh;
+	height: calc (100vh - 200px);
 	display: grid;
 	/* grid-template-columns: 30% 50% 20%; */
-  	grid-template-rows: 40% 20% 40%;
+  grid-template-rows: 40% 20% 40%;
+}
+
+#header ul {
+  list-style-type: none;
 }
