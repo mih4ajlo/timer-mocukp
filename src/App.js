@@ -92,12 +92,7 @@ class App extends Component {
 
         this.setState( state => {
 
-            console.log( state.playersTime[playerNo] );
-            //return;
-
-
-
-
+            
             //ovde ce morati da se update-uje i sistem byoyomija
             //treba mi flag da je regularno vreme isteklo
             //ako je regularno vreme isteklo, resetuj vreme na max byoyomija
@@ -204,38 +199,37 @@ class App extends Component {
 
   render() {
 
-    const rutaConfig = (<Route path="/config" key="config_deo"
-              component={
-                  (props)=>
-                      <Config 
-                          allProps={this.state} 
-                          updateGlobalState={this.updateGlobalState} />
-                        }  
-          />);
-
+    
     return (
       <Router>
         <div className="App" >
           
-          <div>{this.state.totalMoves}</div>
+          
           
           <Route exact path="/" 
-                    component={
-                        (props)=>
-                            <MainContainer 
-                                allProps={this.state} 
-                                countAll={this.allMovesCounter}
-                                move={this.move}
-                                resetAllMovesCounter = {this.resetAllMovesCounter}
-                                tick={this.tick}
+              component={
+                  (props)=>
+                      <MainContainer 
+                          allProps={this.state} 
+                          countAll={this.allMovesCounter}
+                          move={this.move}
+                          resetAllMovesCounter = {this.resetAllMovesCounter}
+                          tick={this.tick}
+                          totalMoves={this.state.totalMoves}
+                          rutaConfig={"/config"}
 
-                                rutaConfig={rutaConfig}
-
-                                />
-                              }  
+                          />
+                        }  
           />
 
-          {rutaConfig}
+          <Route path="/config" key="config_deo"
+          component={
+              (props)=>
+                  <Config 
+                      allProps={this.state} 
+                      updateGlobalState={this.updateGlobalState} />
+                    }  
+          />
 
           <Route path="/sub" key="sub_page"
               component={

@@ -25,8 +25,7 @@ class MainContainer extends Component {
 
         this.rutaConfig = props.rutaConfig;
 
-        console.log("ruta",this.rutaConfig);
-
+        
         this.pauseAll  = this.pauseAll.bind(this);
         this.reset  = this.reset.bind(this);
 
@@ -95,9 +94,14 @@ class MainContainer extends Component {
     		if(i%2==1)
     			elements_temp.push(
     				<div id="centralControls" key={"kontrole"}>
-    					<div><button onClick={that.pauseAll}>Triger Pause all</button></div>
-            			<div><button onClick={that.resetAllMovesCounter}>Reset all</button></div>
-            			{that.rutaConfig}
+                        <div><span>Total moves:</span> {this.props.totalMoves}</div>
+    					
+            			<div className="CentralBtnCnt">
+                            <button onClick={that.pauseAll}> || </button>
+                            <button onClick={that.resetAllMovesCounter}>Reset all</button>
+                        </div>
+            			<div><a href={this.props.rutaConfig}>Config tockic</a></div>
+                        
 
     				</div>
     				) ;
@@ -105,19 +109,17 @@ class MainContainer extends Component {
     	}
 
 		
-		console.log( elements_temp );
+		
 
-    	//
+    	//<Header/>
+        //<div>{process.env.REACT_APP_NOT_SECRET_CODE}</div>
 
         return (
         	<div>
-        		<Header/>
-
-        		<div>{process.env.REACT_APP_NOT_SECRET_CODE}</div>
+        		
         		<div id="timerContainer">
         			{ elements_temp }
         		</div>
-            	
             	
             	
         	</div>

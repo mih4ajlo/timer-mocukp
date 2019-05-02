@@ -70,17 +70,17 @@ class Timer extends Component {
    
     render() {
 
-        //XXX premature optimization
-        //--nema potrebe da se racuna svaki put broj preostalih sati , 
-        //--samo kad je broj sekundi mnozilac broja 3600
-        //if()
-
+        //ovo sve izvuci u helper funkciju gde se prosledjuje vreme, a vraca formatirano vreme
+        ////ako je broj sati 0, nemoj ni prokazivati taj parametar
+        //
                     //~~ == Math.floor
-        let hours = Math.floor(this.state.seconds / 3600);
+        let hours = 0;
+        let minutes = 0;
 
+        if(this.state.seconds > 3600 ) hours = Math.floor(this.state.seconds / 3600);
+        if(this.state.seconds > 60 ) minutes = Math.floor( (this.state.seconds - hours * 3600) / 60);
+         
 
-
-        let minutes =  Math.floor( (this.state.seconds - hours * 3600) / 60);
         let seconds =  this.state.seconds - minutes * 60 - hours * 3600;
 
         if(hours <10) hours = `0${hours}`;
@@ -103,14 +103,20 @@ class Timer extends Component {
 
            <div style={(this.state.playerNo % 2 == 0 && false)? {transform:'rotate(-180deg)'}:null}>
                 <div>
-                    Broj poteza {this.state.moveNo}
+                    
                 </div>
-                <div>{this.state.byoyomiPeriods} x {this.state.byoyomiTime}</div>
-                <div>hh:mm:ss </div>
-                <span>{hours}:{minutes}:{seconds}</span>
+                
+                
+                
 
                 
-                <div> <button onClick={this.pauseProxy}>Move</button> </div>
+                <div className="moveBtnContainer"> 
+                    <button onClick={this.pauseProxy}>
+                        <div>#{this.state.moveNo}</div>
+                        <div className="timerNumbers">{hours}:{minutes}:{seconds}</div>
+                        <div>{this.state.byoyomiPeriods} x {this.state.byoyomiTime}s</div>
+                    </button> 
+                </div>
             </div>
             
         );
